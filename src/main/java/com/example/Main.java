@@ -3,6 +3,8 @@ package com.example;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
@@ -20,12 +22,18 @@ public class Main {
     shoppingList.add("pineapple");
     shoppingList.add("milk");
     shoppingList.add("pasta");
-    Stream<String> shoppingListStream = shoppingList.stream();
-    shoppingListStream
+    // Stream<String> shoppingListStream = shoppingList.stream();
+    List<String> sortedShoppingList = shoppingList.stream() // THIS ALLOWS US TO STORE THE CONTENTS THAT ARE STREAMED INTO A LIST
             .sorted()
             .map(item -> item.toUpperCase())
             .filter(item -> item.startsWith("P"))
-            .forEach(item -> System.out.println(item));
+            .collect(Collectors.toList());
+
+    System.out.println(sortedShoppingList);
+    
+    // shoppingListStream.forEach(item -> System.out.println(item)); // DOESNT WORK BECAUSE A STREAM CAN ONLY BE USED ONCE
+
+    System.out.println(shoppingList);
 
   }
 }
